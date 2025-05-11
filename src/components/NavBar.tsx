@@ -1,22 +1,19 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useDebounce } from '@/hooks/useDebounce';
 import Filter from '@/components/Filter'
 import EmployeeList from '@/components/EmployeeList';
+import { useSelector } from 'react-redux';
 
 const NavBar = () => {
-  const [searchText, setSearchText] = useState('');
+  const employeeList = useSelector((store: any) => store.employeeData?.employeeList || []);
   const debouncedSearch = useDebounce(searchText, 500);
-  const [ employeeList, setEmployeeList ] = useState([])
+
+  const [searchText, setSearchText] = useState('');
   const [selectedTeam, setSelectedTeam] = useState('')
   
-  useEffect(() => {
-    fetch('/api/employees')
-    .then(response => response.json())
-    .then(data => {
-      setEmployeeList(data.employees)
-    })
-    
-  }, [])
+  if (!employeeList) {
+    return <div>Loading...</div>
+  }
 
   function handleTeamChange(team: string) {
     setSearchText('')

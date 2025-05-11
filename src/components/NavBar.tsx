@@ -5,11 +5,12 @@ import EmployeeList from '@/components/EmployeeList';
 import { useSelector } from 'react-redux';
 
 const NavBar = () => {
+  const [searchText, setSearchText] = useState('');
+  const [selectedTeam, setSelectedTeam] = useState('')
+  
   const employeeList = useSelector((store: any) => store.employeeData?.employeeList || []);
   const debouncedSearch = useDebounce(searchText, 500);
 
-  const [searchText, setSearchText] = useState('');
-  const [selectedTeam, setSelectedTeam] = useState('')
   
   if (!employeeList) {
     return <div>Loading...</div>

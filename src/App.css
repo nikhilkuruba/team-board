@@ -1,4 +1,4 @@
-@layer reset, utilities, typography;
+@layer reset, utilities, typography, layout;
 
 @layer reset {
   *, *:before, *:after {
@@ -40,4 +40,30 @@
 
 @layer utilities {
   @import "tailwindcss";
+}
+
+@layer layout {
+  .app-grid {
+    display: grid;
+    grid-template-rows: 4.5rem 1fr;
+    grid-template-columns: 25% 1fr;
+    height: 100vh;
+    grid-template-areas:
+      "header header"
+      "navbar main";
+  }
+  .header {
+    grid-area: header;
+  }
+
+  .navbar {
+    grid-area: navbar;
+    overflow-y: hidden;
+  }
+
+  .main {
+    grid-area: main;
+    overflow-y: auto;
+    padding: 1rem;
+  }
 }

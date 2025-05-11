@@ -1,9 +1,8 @@
-import NavBar from './NavBar'
 
 const MainLayout = () => {
   return (
-    <div>
-      < NavBar />    
+    <div className='main'>
+      MainLayout
     </div>
   )
 }

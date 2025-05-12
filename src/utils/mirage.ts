@@ -1,13 +1,18 @@
-import { createServer, Model } from 'miragejs';
+import { createServer, Model, Response } from 'miragejs';
+
+let server: any;
 
 export function makeServer() {
-  return createServer({
+  if (server) {
+    return server;
+  }
+
+  server = createServer({
     models: {
       employee: Model,
     },
 
     seeds(server) {
-      // Create mock employee data
       server.create('employee', { id: '1', name: 'Mark Hill', designation: 'CEO', team: 'Leadership', manager: null });
 
       server.create('employee', { id: '2', name: 'Bob', designation: 'CTO', team: 'Engineering', manager: '1' });
@@ -18,11 +23,16 @@ export function makeServer() {
 
       server.create('employee', { id: '7', name: 'Charlie', designation: 'Software development manager', team: 'Engineering', manager: '2' });
 
+      // server.create('employee', { id: '27', name: 'David', designation: 'Lead developer', team: 'Engineering', manager: '2' });
       server.create('employee', { id: '8', name: 'David', designation: 'Lead developer', team: 'Engineering', manager: '5' });
       server.create('employee', { id: '9', name: 'Hannah', designation: 'Lead developer', team: 'Engineering', manager: '5' });
 
       server.create('employee', { id: '10', name: 'Frank', designation: 'Software Developer', team: 'Engineering', manager: '7' });
       server.create('employee', { id: '11', name: 'Hannah2', designation: 'Software Developer', team: 'Engineering', manager: '8' });
+      // server.create('employee', { id: '9', name: 'Hannah', designation: 'Lead developer', team: 'Engineering', manager: '3' });
+
+      // server.create('employee', { id: '10', name: 'Frank', designation: 'Software Developer', team: 'Engineering', manager: '3' });
+      // server.create('employee', { id: '11', name: 'Alice', designation: 'Software Developer', team: 'Engineering', manager: '3' });
 
       server.create('employee', { id: '12', name: 'Hannah3', designation: 'Customer Service Representative', team: 'Tech Support', manager: '3' });
       server.create('employee', { id: '13', name: 'Hannah4', designation: 'Marketing analyst', team: 'Marketing', manager: '4' });
@@ -34,12 +44,26 @@ export function makeServer() {
     },
 
     routes() {
-      this.namespace = 'api'; // Defines the API namespace
-
-      // Route to fetch all employees
+      this.namespace = 'api';
       this.get('/employees', (schema) => {
         return schema.all('employee');
       });
+
+      this.post('/employees/:id/manager', (schema, request) => {
+        const id = request.params.id;
+        const { newManagerId } = JSON.parse(request.requestBody);
+
+        const employee = schema.employees.find(id);
+        if (employee) {
+          employee.update({ manager: newManagerId });
+          console.log(employee);
+          return { success: true, employee };
+          
+        } else {
+          return new Response(404, {}, { error: 'Employee data not found' });
+        }
+      });
     },
   });
+  return server;
 }

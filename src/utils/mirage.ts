@@ -16,31 +16,26 @@ export function makeServer() {
       server.create('employee', { id: '1', name: 'Mark Hill', designation: 'CEO', team: 'Leadership', manager: null });
 
       server.create('employee', { id: '2', name: 'Bob', designation: 'CTO', team: 'Engineering', manager: '1' });
-      server.create('employee', { id: '3', name: 'Eva', designation: 'Technical Support Manager', team: 'Tech Support', manager: '1' });
+      server.create('employee', { id: '3', name: 'Eva', designation: 'Support Manager', team: 'Tech Support', manager: '1' });
       server.create('employee', { id: '4', name: 'Grace', designation: 'Marketing Manager', team: 'Marketing', manager: '1' });
       server.create('employee', { id: '5', name: 'Linda May', designation: 'Sales Manager', team: 'Sales', manager: '1' });
-      server.create('employee', { id: '6', name: 'John Green', designation: 'Chief accounting officer', team: 'Accounting', manager: '1' });
+      server.create('employee', { id: '6', name: 'John Green', designation: 'Chief accountant', team: 'Accounting', manager: '1' });
 
-      server.create('employee', { id: '7', name: 'Charlie', designation: 'Software development manager', team: 'Engineering', manager: '2' });
+      server.create('employee', { id: '7', name: 'Charlie', designation: 'Development manager', team: 'Engineering', manager: '2' });
 
-      // server.create('employee', { id: '27', name: 'David', designation: 'Lead developer', team: 'Engineering', manager: '2' });
       server.create('employee', { id: '8', name: 'David', designation: 'Lead developer', team: 'Engineering', manager: '5' });
       server.create('employee', { id: '9', name: 'Hannah', designation: 'Lead developer', team: 'Engineering', manager: '5' });
 
       server.create('employee', { id: '10', name: 'Frank', designation: 'Software Developer', team: 'Engineering', manager: '7' });
-      server.create('employee', { id: '11', name: 'Hannah2', designation: 'Software Developer', team: 'Engineering', manager: '8' });
-      // server.create('employee', { id: '9', name: 'Hannah', designation: 'Lead developer', team: 'Engineering', manager: '3' });
+      server.create('employee', { id: '11', name: 'Ron', designation: 'Software Developer', team: 'Engineering', manager: '8' });
 
-      // server.create('employee', { id: '10', name: 'Frank', designation: 'Software Developer', team: 'Engineering', manager: '3' });
-      // server.create('employee', { id: '11', name: 'Alice', designation: 'Software Developer', team: 'Engineering', manager: '3' });
-
-      server.create('employee', { id: '12', name: 'Hannah3', designation: 'Customer Service Representative', team: 'Tech Support', manager: '3' });
-      server.create('employee', { id: '13', name: 'Hannah4', designation: 'Marketing analyst', team: 'Marketing', manager: '4' });
-      server.create('employee', { id: '14', name: 'Hannah5', designation: 'Marketing analyst', team: 'Marketing', manager: '4' });
-      server.create('employee', { id: '15', name: 'Hannah6', designation: 'Sales Representative', team: 'Sales', manager: '5' });
-      server.create('employee', { id: '16', name: 'Hannah7', designation: 'Sales Representative', team: 'Sales', manager: '5' });
-      server.create('employee', { id: '17', name: 'Hannah8', designation: 'Accountant', team: 'Accounting', manager: '6' });
-      server.create('employee', { id: '18', name: 'Hannah9', designation: 'Accountant', team: 'Accounting', manager: '6' });
+      server.create('employee', { id: '12', name: 'Alice', designation: 'Service Representative', team: 'Tech Support', manager: '3' });
+      server.create('employee', { id: '13', name: 'Mary', designation: 'Marketing analyst', team: 'Marketing', manager: '4' });
+      server.create('employee', { id: '14', name: 'kirk', designation: 'Marketing analyst', team: 'Marketing', manager: '4' });
+      server.create('employee', { id: '15', name: 'Micheal', designation: 'Sales Representative', team: 'Sales', manager: '5' });
+      server.create('employee', { id: '16', name: 'Peter', designation: 'Sales Representative', team: 'Sales', manager: '5' });
+      server.create('employee', { id: '17', name: 'glenn', designation: 'Accountant', team: 'Accounting', manager: '6' });
+      server.create('employee', { id: '18', name: 'Rick', designation: 'Accountant', team: 'Accounting', manager: '6' });
     },
 
     routes() {

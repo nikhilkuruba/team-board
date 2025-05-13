@@ -8,9 +8,9 @@ const EmployeeList: React.FC<{ employeeList: EmployeeData[] }> = (props) => {
       <ul className='w-full h-full'>
         {props.employeeList.map((employee) => (
           <li key={employee.id} className='w-full px-4 py-2 border-b border-gray-300'>
-            <h2>{employee.name}</h2>
-            <p className='text-sm text-gray-700'>{employee.designation}</p>
-            <p className='text-sm text-gray-600'>{employee.team}</p>
+            <h2 className='text-[#F9FAFB]'>{employee.name}</h2>
+            <p className='text-sm text-[#D1D5DB]'>{employee.designation}</p>
+            <p className='text-sm text-[#9CA3AF]'>{employee.team}</p>
           </li>
         ))}
       </ul>

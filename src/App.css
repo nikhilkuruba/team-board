@@ -14,10 +14,20 @@
     padding: 0;
     font: inherit;
   }
-  
-  /* html {
-    color-scheme: light dark;
-  } */
+
+  *::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background-color: #333;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: grey;
+    border-radius: 10px;
+  }
   
   body {
     min-height: 100vh;
@@ -66,4 +76,22 @@
     overflow-y: auto;
     padding: 1rem;
   }
+}
+#treeWrapper .rd3t-link {
+    fill: none;
+    stroke: #fff ;
+  
+} 
+#treeWrapper .rd3t-node {
+  cursor: pointer;
+  fill: #777;
+  stroke: transparent;
+  stroke-width: 2;
+}
+
+#treeWrapper .rd3t-leaf-node {
+  cursor: pointer;
+  fill: transparent;
+  stroke: transparent;
+  stroke-width: 1;
 }

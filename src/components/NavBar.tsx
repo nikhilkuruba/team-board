@@ -1,54 +1,66 @@
-import { useState } from 'react'
-import { useDebounce } from '@/hooks/useDebounce';
-import Filter from '@/components/Filter'
-import EmployeeList from '@/components/EmployeeList';
-import { useSelector } from 'react-redux';
+import { useState, useEffect } from "react";
+import { useDebounce } from "@/hooks/useDebounce";
+import Filter from "@/components/Filter";
+import EmployeeList from "@/components/EmployeeList";
+import { useSelector, useDispatch } from "react-redux";
+import { setFilteredEmployeeList } from "@/store/employeeSlice";
 
 const NavBar = () => {
-  const [searchText, setSearchText] = useState('');
-  const [selectedTeam, setSelectedTeam] = useState('')
-  
-  const employeeList = useSelector((store: any) => store.employeeData?.employeeList || []);
+  const [searchText, setSearchText] = useState("");
+  const [selectedTeam, setSelectedTeam] = useState("");
+  const dispatch = useDispatch();
+  const employeeList = useSelector(
+    (store: any) => store.employeeData?.employeeList || []
+  );
   const debouncedSearch = useDebounce(searchText, 500);
+  useEffect(() => {
+    const filteredEmployeeList = selectedTeam
+      ? employeeList.filter((employee) => employee.team === selectedTeam)
+      : employeeList;
+    dispatch(setFilteredEmployeeList(filteredEmployeeList));
+  }, [selectedTeam]);
 
-  
   if (!employeeList) {
-    return <div>Loading...</div>
+    return <div>Loading...</div>;
   }
 
   function handleTeamChange(team: string) {
-    setSearchText('')
-    setSelectedTeam(team)
+    setSearchText("");
+    setSelectedTeam(team);
   }
-  
-  const FilterList = employeeList.map((employee) => employee.team)
-  const uniqueTeams = Array.from(new Set(FilterList))
-  
-  const filteredEmployeeList = selectedTeam ? employeeList.filter((employee) => employee.team === selectedTeam) :employeeList
+
+  const FilterList: string[] = employeeList
+    .map((employee) => employee.team)
+    .filter((team: string | null) => !!team);
+  const uniqueTeams = Array.from(new Set(FilterList));
+
+  const filteredEmployeeList = selectedTeam
+    ? employeeList.filter((employee) => employee.team === selectedTeam)
+    : employeeList;
 
   const EmployeesfilteredBySearch = filteredEmployeeList.filter((emp) =>
-      [emp.name, emp.id, emp.designation].some((field) =>
-        field.toLowerCase().includes(debouncedSearch.toLowerCase())
-      )
-    );
-  
+    [emp.name, emp.id, emp.designation].some((field) =>
+      field.toLowerCase().includes(debouncedSearch.toLowerCase())
+    )
+  );
+
   return (
-    <div className='navbar flex flex-col h-full border-r-2 border-gray-200 shadow-md '>
-      <div className="shrink-0 p-8">
+    <div className="navbar flex flex-col bg-[#1F2937] h-full border-r-2 border-[#000] shadow-md ">
+      <div className="shrink-0 p-8 border-b-2 border-[#000]">
         <div className="search-bar">
           <input
             type="text"
             placeholder="Search by name, id or designation"
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
-            className=" border border-[#222222] rounded px-4 py-2 overflow-hidden mb-4 max-w-full text-sm"
+            className="w-full px-4 py-2 mb-4 text-sm rounded border border-[#6B7280] bg-[#374151] text-[#F9FAFB] placeholder-[#9CA3AF] focus:outline-none focus:border-[#60A5FA]"
           />
         </div>
         <Filter teams={uniqueTeams} onTeamChange={handleTeamChange} />
       </div>
       <EmployeeList employeeList={EmployeesfilteredBySearch} />
     </div>
-  )
-}
+  );
+};
 
-export default NavBar
+export default NavBar;

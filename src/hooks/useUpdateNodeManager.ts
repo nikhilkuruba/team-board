@@ -1,8 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import {
-  setEmployeeList,
-  setFilteredEmployeeList,
-} from "@/store/employeeSlice";
+import { setEmployeeList, setFilteredEmployeeList } from "@/store/employeeSlice";
 import type { EmployeeData } from "@/utils/types";
 
 export default function useUpdateNodeManager() {
@@ -13,21 +10,23 @@ export default function useUpdateNodeManager() {
   const filteredEmployeeList = useSelector(
     (store: any) => store.employeeData?.filteredEmployeeList || []
   );
-  const updateManager = (employeeId: string, newManagerId: string) =>
-    fetch(`/api/employees/${employeeId}/manager`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ newManagerId }),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .catch((error) => {
-        console.error("Error updating manager:", error);
+  const updateManager = async (employeeId: string, newManagerId: string) => {
+    try {
+      const response = await fetch(`/api/employees/${employeeId}/manager`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ newManagerId }),
       });
+
+      if (!response.ok) {
+        throw new Error("Error updating manager Id");
+      }
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Error updating manager Id:", error);
+    }
+  };
 
   const updateManagerInStore = (employeeId: string, newManagerId: string) => {
     const employeeListCopy = [...employeeList.map((emp: EmployeeData) => ({ ...emp }))];
@@ -40,8 +39,13 @@ export default function useUpdateNodeManager() {
       (emp) => emp.id === employeeId
     );
 
-    employee.manager = newManagerId;
-    filteredEmployee.manager = newManagerId;
+    const newManager = employeeList.find((emp) => emp.id === newManagerId);
+    if (newManager) {
+      employee.manager = newManagerId;
+      employee.team = newManager.team;
+      filteredEmployee.manager = newManagerId;
+      filteredEmployee.team = newManager.team;
+    }
     dispatch(setEmployeeList(employeeListCopy));
     dispatch(setFilteredEmployeeList(filteredEmployeeListCopy));
   };

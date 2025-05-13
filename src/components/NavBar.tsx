@@ -8,11 +8,12 @@ import { setFilteredEmployeeList } from "@/store/employeeSlice";
 const NavBar = () => {
   const [searchText, setSearchText] = useState("");
   const [selectedTeam, setSelectedTeam] = useState("");
+
   const dispatch = useDispatch();
-  const employeeList = useSelector(
-    (store: any) => store.employeeData?.employeeList || []
-  );
+
+  const employeeList = useSelector((store: any) => store.employeeData?.employeeList || []);
   const debouncedSearch = useDebounce(searchText, 500);
+  
   useEffect(() => {
     const filteredEmployeeList = selectedTeam
       ? employeeList.filter((employee) => employee.team === selectedTeam)
@@ -47,13 +48,13 @@ const NavBar = () => {
   return (
     <div className="navbar flex flex-col bg-[#1F2937] h-full border-r-2 border-[#000] shadow-md ">
       <div className="shrink-0 p-8 border-b-2 border-[#000]">
-        <div className="search-bar">
+        <div className="search-bar h-12">
           <input
             type="text"
             placeholder="Search by name, id or designation"
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
-            className="w-full px-4 py-2 mb-4 text-sm rounded border border-[#6B7280] bg-[#374151] text-[#F9FAFB] placeholder-[#9CA3AF] focus:outline-none focus:border-[#60A5FA]"
+            className="w-full px-4 py-2 mb-4 h-10 text-sm rounded border border-[#6B7280] bg-[#374151] text-[#F9FAFB] placeholder-[#9CA3AF] focus:outline-none focus:border-[#60A5FA]"
           />
         </div>
         <Filter teams={uniqueTeams} onTeamChange={handleTeamChange} />

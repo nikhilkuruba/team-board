@@ -160,8 +160,9 @@ export function makeServer() {
         const { newManagerId } = JSON.parse(request.requestBody);
 
         const employee = schema.employees.find(id);
-        if (employee) {
-          employee.update({ manager: newManagerId });
+        const newManager = schema.employees.find(newManagerId);
+        if (employee && newManager) {
+          employee.update({ manager: newManagerId, team: newManager.team });         
           return { success: true, employee };
         } else {
           return new Response(404, {}, { error: "Employee data not found" });

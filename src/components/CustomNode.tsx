@@ -56,66 +56,28 @@ export default function CustomNode({ nodeDatum }: { nodeDatum: NodeDatum }) {
   }, [nodeDatum.id]);
 
   return (
-    <g
-      ref={ref}
-      data-node-id={nodeDatum.id}
-      data-node-hierarchy={nodeDatum.hierarchyLevel}
-      cursor="move"
-    >
+    <g ref={ref} data-node-id={nodeDatum.id} data-node-hierarchy={nodeDatum.hierarchyLevel} cursor="move">
       <defs>
         <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow
-            dx="0"
-            dy="2"
-            stdDeviation="3"
-            floodColor="#000"
-            floodOpacity="0.4"
-          />
+          <feDropShadow dx="0" dy="2" stdDeviation="3" floodColor="#000" floodOpacity="0.4" />
         </filter>
       </defs>
 
-      <rect
-        width="170"
-        height="70"
-        x="-85"
-        y="-35"
-        rx="0"
-        ry="0"
-        stroke="#3B82F6"
-        strokeWidth="2"
-        fill="#1F2937"
-        filter="url(#shadow)"
-      />
+      <rect width="210" height="90" x="-85" y="-35" rx="0" ry="0" stroke="#3B82F6" strokeWidth="2" fill="#1F2937" filter="url(#shadow)" />
 
       <text
-        fontSize="14"
-        x="0"
-        y="-8"
-        textAnchor="middle"
-        fill={
-          nodeDatum.hierarchyLevel === 1
-            ? "#F59E0B"
-            : nodeDatum.hierarchyLevel === 2
-            ? "#10B981"
-            : "#60A5FA"
-        }
+        fontSize="20" x="0" y="-8" textAnchor="middle" 
+        fill={ nodeDatum.hierarchyLevel === 1 ? "#F59E0B" : nodeDatum.hierarchyLevel === 2 ? "#10B981" : "#60A5FA" }
         fontWeight="bold"
       >
         {nodeDatum.name}
       </text>
 
-      <text
-        fill="#D1D5DB"
-        fontSize="12"
-        x="0"
-        y="10"
-        textAnchor="middle"
-        fontStyle="italic"
-      >
+      <text fill="#D1D5DB" fontSize="12" x="10" y="20" textAnchor="middle" fontStyle="italic">
         {nodeDatum.designation}
       </text>
 
-      <text fill="#9CA3AF" fontSize="11" x="0" y="26" textAnchor="middle">
+      <text fill="#9CA3AF" fontSize="11" x="0" y="40" textAnchor="middle">
         Emp ID: {nodeDatum.id}
       </text>
     </g>

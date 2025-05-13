@@ -77,7 +77,7 @@ const MainLayout = () => {
     <div
       id="treeWrapper"
       ref={containerRef}
-      className="bg-[#111827]"
+      className="bg-[#111827] main-layout"
       style={{ width: "100%", overflow: "hidden" }}
     >
       {root && (

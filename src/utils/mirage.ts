@@ -20,7 +20,6 @@ export function makeServer() {
         team: "",
         manager: null,
       });
-
       server.create("employee", {
         id: "2",
         name: "Bob",
@@ -56,7 +55,6 @@ export function makeServer() {
         team: "Accounting",
         manager: "1",
       });
-
       server.create("employee", {
         id: "7",
         name: "Charlie",
@@ -64,7 +62,6 @@ export function makeServer() {
         team: "Engineering",
         manager: "2",
       });
-
       server.create("employee", {
         id: "8",
         name: "David",
@@ -79,7 +76,6 @@ export function makeServer() {
         team: "Engineering",
         manager: "7",
       });
-
       server.create("employee", {
         id: "10",
         name: "Frank",
@@ -94,7 +90,6 @@ export function makeServer() {
         team: "Engineering",
         manager: "9",
       });
-
       server.create("employee", {
         id: "12",
         name: "Alice",
@@ -102,7 +97,6 @@ export function makeServer() {
         team: "Tech Support",
         manager: "3",
       });
-
       server.create("employee", {
         id: "13",
         name: "Mary",
@@ -117,7 +111,6 @@ export function makeServer() {
         team: "Marketing",
         manager: "4",
       });
-
       server.create("employee", {
         id: "15",
         name: "Micheal",
@@ -132,7 +125,6 @@ export function makeServer() {
         team: "Sales",
         manager: "5",
       });
-
       server.create("employee", {
         id: "17",
         name: "glenn",

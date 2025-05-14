@@ -7,16 +7,16 @@ import { useEffect, useState } from 'react'
 
 const ERROR_MESSAGE = 'Error while fetching employee data'
 
-const Body = () => {
+const Body: React.FC = () => {
   const dispatch = useDispatch()
   const [isLoading, setIsLoading] = useState(false)
-  const [errorMsg, setErrorMsg] = useState(null)
+  const [errorMsg, setErrorMsg] = useState('')
 
   useEffect(() => {
     const fetchEmployees = async () => {
       try {
         setIsLoading(true)
-        setErrorMsg(null)
+        setErrorMsg('')
         const response = await fetch('/api/employees');
         if (!response.ok) {
           throw new Error('Failed to fetch employees');
@@ -24,6 +24,9 @@ const Body = () => {
         const data = await response.json();
         dispatch(setEmployeeList(data.employees));
         dispatch(setFilteredEmployeeList(data.employees));
+        if (data.employees.length === 0) {
+          setErrorMsg('No employees found');
+        }
       } catch (error) {
         console.error('Error while fetching employee data:', error);
         setErrorMsg(ERROR_MESSAGE);
@@ -37,7 +40,7 @@ const Body = () => {
   return (
     <div className='bg-gray-100 app-grid'>
       <Header />
-      {!isLoading ?
+      {!isLoading && !errorMsg ?
         <>
           <NavBar />
           <MainLayout />

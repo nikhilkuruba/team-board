@@ -1,13 +1,11 @@
 import { useEffect, useRef } from "react";
 import useUpdateNodeManager from "@/hooks/useUpdateNodeManager";
-import type { NodeDatum } from "@/utils/types";
 import * as d3 from "d3";
-
+import type { NodeDatum } from "@/utils/types";
 
 export default function CustomNode({ nodeDatum }: { nodeDatum: NodeDatum }) {
   const ref = useRef<SVGGElement>(null);
   const { updateManager, updateManagerInStore } = useUpdateNodeManager();
-
   useEffect(() => {
     if (!ref.current) return;
     const draggedNodeId = nodeDatum.id;

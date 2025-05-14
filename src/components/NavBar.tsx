@@ -4,6 +4,7 @@ import Filter from "@/components/Filter";
 import EmployeeList from "@/components/EmployeeList";
 import { useSelector, useDispatch } from "react-redux";
 import { setFilteredEmployeeList } from "@/store/employeeSlice";
+import type { EmployeeData } from "@/utils/types";
 
 const NavBar = () => {
   const [searchText, setSearchText] = useState("");
@@ -16,7 +17,7 @@ const NavBar = () => {
   
   useEffect(() => {
     const filteredEmployeeList = selectedTeam
-      ? employeeList.filter((employee) => employee.team === selectedTeam)
+      ? employeeList.filter((employee: EmployeeData) => employee.team === selectedTeam)
       : employeeList;
     dispatch(setFilteredEmployeeList(filteredEmployeeList));
   }, [selectedTeam]);
@@ -31,12 +32,12 @@ const NavBar = () => {
   }
 
   const FilterList: string[] = employeeList
-    .map((employee) => employee.team)
+    .map((employee: EmployeeData) => employee.team)
     .filter((team: string | null) => !!team);
   const uniqueTeams = Array.from(new Set(FilterList));
 
-  const filteredEmployeeList = selectedTeam
-    ? employeeList.filter((employee) => employee.team === selectedTeam)
+  const filteredEmployeeList: EmployeeData[] = selectedTeam
+    ? employeeList.filter((employee: EmployeeData) => employee.team === selectedTeam)
     : employeeList;
 
   const EmployeesfilteredBySearch = filteredEmployeeList.filter((emp) =>

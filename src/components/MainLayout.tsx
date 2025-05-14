@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import type { EmployeeListProps } from "@/utils/types";
+import type { EmployeeData ,EmployeeListProps } from "@/utils/types";
 import { useEffect, useRef, useState } from "react";
 import Tree from "react-d3-tree";
 import CustomNode from "./CustomNode";
@@ -19,7 +19,7 @@ function buildHierarchy(employees: EmployeeListProps): any {
     }
     return employee;
   });
-  updatedEmployeeList.forEach((emp) => {
+  updatedEmployeeList.forEach((emp: EmployeeData) => {
     map[emp.id] = { ...emp, children: [] };
   });
 
@@ -45,12 +45,12 @@ const MainLayout = () => {
   const employeeList = useSelector(
     (store: any) => store.employeeData?.filteredEmployeeList || []
   );
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [translate, setTranslate] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
 
   const root = buildHierarchy(employeeList);
-  const key = employeeList?.length + "-" + employeeList?.map((e) => e?.id + "-" + e?.manager)?.join(",");
+  const key = employeeList?.length + "-" + employeeList?.map((e: EmployeeData) => e?.id + "-" + e?.manager)?.join(",");
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -84,7 +84,7 @@ const MainLayout = () => {
         <Tree
           key={key}
           data={root}
-          renderCustomNodeElement={(rd3tProps) => <CustomNode {...rd3tProps} />}
+          renderCustomNodeElement={(rd3tProps) => <CustomNode nodeDatum={rd3tProps.nodeDatum} />}
           pathFunc="step"
           separation={{ siblings: 2, nonSiblings: 2 }}
           orientation="vertical"

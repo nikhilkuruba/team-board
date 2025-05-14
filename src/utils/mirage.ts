@@ -1,4 +1,5 @@
-import { createServer, Model, Response } from "miragejs";
+import { createServer, Model, Response  } from "miragejs";
+import type { EmployeeData } from '@/utils/types';
 
 let server: any;
 
@@ -9,7 +10,7 @@ export function makeServer() {
 
   server = createServer({
     models: {
-      employee: Model,
+      employee: Model.extend<Partial<EmployeeData>>({}),
     },
 
     seeds(server) {
@@ -150,9 +151,8 @@ export function makeServer() {
       this.post("/employees/:id/manager", (schema, request) => {
         const id = request.params.id;
         const { newManagerId } = JSON.parse(request.requestBody);
-
-        const employee = schema.employees.find(id);
-        const newManager = schema.employees.find(newManagerId);
+        const employee = (schema as any).employees.find(id);
+        const newManager = (schema as any).employees.find(newManagerId);
         if (employee && newManager) {
           employee.update({ manager: newManagerId, team: newManager.team });         
           return { success: true, employee };

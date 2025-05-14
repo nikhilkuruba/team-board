@@ -39,7 +39,7 @@ export default function useUpdateNodeManager() {
       (emp) => emp.id === employeeId
     );
 
-    const newManager = employeeList.find((emp) => emp.id === newManagerId);
+    const newManager = employeeList.find((emp: EmployeeData) => emp.id === newManagerId);
     if (newManager) {
       employee.manager = newManagerId;
       employee.team = newManager.team;

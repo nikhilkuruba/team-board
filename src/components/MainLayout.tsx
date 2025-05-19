@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import type { EmployeeData ,EmployeeListProps } from "@/utils/types";
 import { useEffect, useRef, useState } from "react";
 import Tree from "react-d3-tree";
-import CustomNode from "./CustomNode";
+import CustomNode from "@/components/CustomNode";
 
 function buildHierarchy(employees: EmployeeListProps): any {
   if (!employees || !employees.length) return null;

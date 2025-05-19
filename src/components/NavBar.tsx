@@ -13,6 +13,7 @@ const NavBar = () => {
   const dispatch = useDispatch();
 
   const employeeList = useSelector((store: any) => store.employeeData?.employeeList || []);
+  const filteredEmployeeList: EmployeeData[] = useSelector((store: any) => store.employeeData?.filteredEmployeeList || []);
   const debouncedSearch = useDebounce(searchText, 500);
   
   useEffect(() => {
@@ -35,10 +36,6 @@ const NavBar = () => {
     .map((employee: EmployeeData) => employee.team)
     .filter((team: string | null) => !!team);
   const uniqueTeams = Array.from(new Set(FilterList));
-
-  const filteredEmployeeList: EmployeeData[] = selectedTeam
-    ? employeeList.filter((employee: EmployeeData) => employee.team === selectedTeam)
-    : employeeList;
 
   const EmployeesfilteredBySearch = filteredEmployeeList.filter((emp) =>
     [emp.name, emp.id, emp.designation].some((field) =>

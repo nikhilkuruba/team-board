@@ -2,10 +2,12 @@ import { useState, type ChangeEvent, type ReactNode } from "react";
 import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import type { FilterProps } from "@/utils/types";
 
-const TeamFilterSelect: React.FC<FilterProps> = ({ teams, onTeamChange }) => {
-  const [selectedTeam, setSelectedTeam] = useState("");
+type FilterchangeEvent = ChangeEvent<Omit<HTMLInputElement, "value"> & { value: string; }> | (Event & { target: { value: string; name: string; }; })
 
-  const handleTeamChange: (event: ChangeEvent<Omit<HTMLInputElement, "value"> & { value: string; }> | (Event & { target: { value: string; name: string; }; }), child: ReactNode) => void = (event) => {
+const TeamFilterSelect: React.FC<FilterProps> = ({ teams, onTeamChange }) => {
+  const [ selectedTeam, setSelectedTeam ] = useState("");
+
+  const handleTeamChange: (event: FilterchangeEvent, child: ReactNode) => void = (event) => {
     const team = event.target.value;
     setSelectedTeam(team);
     onTeamChange(team);
@@ -57,7 +59,7 @@ const TeamFilterSelect: React.FC<FilterProps> = ({ teams, onTeamChange }) => {
           },
         }}
       >
-        {teams.length && <MenuItem value="">All Teams</MenuItem>}
+        {teams.length > 0 && <MenuItem value="" className="italic ">All Teams</MenuItem>}
         {teams.map((team) => (
           <MenuItem key={team} value={team}>
             {team}

@@ -51,7 +51,7 @@ const Body: React.FC = () => {
           <h1 className="text-red-700 text-2xl">{errorMsg}</h1>
         </div> 
         :
-        <div className="flex justify-center items-center bg-gray-500 loading-spinner">
+        <div role="loading-spinner" className="flex justify-center items-center bg-gray-500 loading-spinner">
           <div className="animate-spin rounded-full h-18 w-18 border-b-2 border-gray-900"></div>
         </div>)
       }

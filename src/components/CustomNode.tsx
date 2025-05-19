@@ -10,8 +10,7 @@ export default function CustomNode({ nodeDatum }: { nodeDatum: NodeDatum }) {
     if (!ref.current) return;
     const draggedNodeId = nodeDatum.id;
     if (!draggedNodeId || Number(draggedNodeId) <= 2) return;
-    const drag = d3
-      .drag<SVGGElement, unknown>()
+    const drag = d3.drag<SVGGElement, unknown>()
       .on("start", function () {
         d3.select(this).raise();
       })
@@ -27,26 +26,18 @@ export default function CustomNode({ nodeDatum }: { nodeDatum: NodeDatum }) {
           event.sourceEvent.clientY
         );
         draggedEl.style.display = originalDisplay;
-        if (dropTarget) {
-          const targetNodeGroup = dropTarget.closest("g[data-node-id]");
-          const targetNodeId = targetNodeGroup?.getAttribute("data-node-id");
-          const targetNodeHierarchy = targetNodeGroup?.getAttribute(
-            "data-node-hierarchy"
-          );
-          if (
-            targetNodeId &&
-            targetNodeId !== draggedNodeId &&
-            nodeDatum.manager !== targetNodeId &&
-            Number(targetNodeHierarchy) < Number(nodeDatum.hierarchyLevel)
-          ) {
-            updateManager(draggedNodeId, targetNodeId);
-            updateManagerInStore(draggedNodeId, targetNodeId);
-          } else {
-            d3.select(this)
-              .transition()
-              .duration(300)
-              .attr("transform", `translate(${0}, ${0})`);
-          }
+        
+        if (!dropTarget) return
+
+        const targetNodeGroup = dropTarget.closest("g[data-node-id]")
+        const targetNodeId = targetNodeGroup?.getAttribute("data-node-id")
+        const targetNodeHierarchy = targetNodeGroup?.getAttribute("data-node-hierarchy")
+
+        if (targetNodeId && targetNodeId !== draggedNodeId && nodeDatum.manager !== targetNodeId && Number(targetNodeHierarchy) < Number(nodeDatum.hierarchyLevel)) {
+          updateManager(draggedNodeId, targetNodeId);
+          updateManagerInStore(draggedNodeId, targetNodeId);
+        } else {
+          d3.select(this).transition().duration(300).attr("transform", `translate(${0}, ${0})`);
         }
       });
 
@@ -54,7 +45,7 @@ export default function CustomNode({ nodeDatum }: { nodeDatum: NodeDatum }) {
   }, [nodeDatum.id]);
 
   return (
-    <g ref={ref} data-node-id={nodeDatum.id} data-node-hierarchy={nodeDatum.hierarchyLevel} cursor="move">
+    <g ref={ref} data-testid="custom-node" data-node-id={nodeDatum.id} data-node-hierarchy={nodeDatum.hierarchyLevel} cursor="move">
       <defs>
         <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
           <feDropShadow dx="0" dy="2" stdDeviation="3" floodColor="#000" floodOpacity="0.4" />
@@ -71,7 +62,7 @@ export default function CustomNode({ nodeDatum }: { nodeDatum: NodeDatum }) {
         {nodeDatum.name}
       </text>
 
-      <text fill="#D1D5DB" fontSize="12" x="10" y="20" textAnchor="middle" fontStyle="italic">
+      <text fill="#D1D5DB" fontSize="12" x="5" y="20" textAnchor="middle" fontStyle="italic">
         {nodeDatum.designation}
       </text>
 

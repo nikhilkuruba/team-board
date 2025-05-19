@@ -94,7 +94,7 @@ export function makeServer() {
       server.create("employee", {
         id: "12",
         name: "Alice",
-        designation: "Service Representative",
+        designation: "Support engineer",
         team: "Tech Support",
         manager: "3",
       });

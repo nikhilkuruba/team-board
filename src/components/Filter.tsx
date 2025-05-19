@@ -19,25 +19,25 @@ const TeamFilterSelect: React.FC<FilterProps> = ({ teams, onTeamChange }) => {
       variant="outlined"
       size="small"
       sx={{
-        backgroundColor: "#374151",
+        backgroundColor: "var(--color-bg-sidebar)",
         borderRadius: 1,
         "& .MuiOutlinedInput-root": {
-          color: "#F9FAFB",
+          color: "var(--color-text-filter)",
           "& fieldset": {
-            borderColor: "#6B7280",
+            borderColor: "var(--color-border-filter)",
           },
           "&:hover fieldset": {
-            borderColor: "#9CA3AF",
+            borderColor: "var(--color-emp-text)",
           },
           "&.Mui-focused fieldset": {
-            borderColor: "#60A5FA",
+            borderColor: "var(--color-input-border)",
           },
         },
         "& .MuiInputLabel-root": {
-          color: "#D1D5DB",
+          color: "var(--color-input-label)",
         },
         "& .MuiSelect-icon": {
-          color: "#D1D5DB",
+          color: "var(--color-input-label)",
         },
       }}
     >
@@ -50,10 +50,10 @@ const TeamFilterSelect: React.FC<FilterProps> = ({ teams, onTeamChange }) => {
         MenuProps={{
           PaperProps: {
             sx: {
-              backgroundColor: "#1F2937",
-              color: "#F9FAFB",
+              backgroundColor: "var(--color-bg-navbar)",
+              color: "var(--color-text-filter)",
               "& .MuiMenuItem-root:hover": {
-                backgroundColor: "#4B5563",
+                backgroundColor: "var(--color-input-bg-hover)",
               },
             },
           },

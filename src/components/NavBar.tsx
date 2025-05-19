@@ -44,15 +44,15 @@ const NavBar = () => {
   );
 
   return (
-    <div className="navbar flex flex-col bg-[#1F2937] h-full border-r-2 border-[#000] shadow-md ">
-      <div className="shrink-0 p-8 border-b-2 border-[#000]">
+    <div className="navbar flex flex-col bg-[var(--color-bg-navbar)] h-full border-r-2 border-[var(--color-black)] shadow-md ">
+      <div className="shrink-0 p-8 border-b-2 border-[var(--color-black)]">
         <div className="search-bar h-12">
           <input
             type="text"
             placeholder="Search by name, id or designation"
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
-            className="w-full px-4 py-2 mb-4 h-10 text-sm rounded border border-[#6B7280] bg-[#374151] text-[#F9FAFB] placeholder-[#9CA3AF] focus:outline-none focus:border-[#60A5FA]"
+            className="w-full px-4 py-2 mb-4 h-10 text-sm rounded border border-[var(--color-border-filter)] bg-[var(--color-bg-sidebar)] text-[var(--color-text-filter)] placeholder-[var(--color-emp-text)] focus:outline-none focus:border-[var(--color-input-border)]"
           />
         </div>
         <Filter teams={uniqueTeams} onTeamChange={handleTeamChange} />

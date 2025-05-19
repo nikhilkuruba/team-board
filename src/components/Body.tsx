@@ -38,7 +38,7 @@ const Body: React.FC = () => {
   }, [])
 
   return (
-    <div className='bg-gray-100 app-grid'>
+    <div className='bg-[var(--color-bg-mainlayout)] app-grid'>
       <Header />
       {!isLoading && !errorMsg ?
         <>
@@ -47,12 +47,12 @@ const Body: React.FC = () => {
         </> 
         : 
         (errorMsg ?
-        <div className="flex justify-center items-center bg-gray-500 error-message">
-          <h1 className="text-red-700 text-2xl">{errorMsg}</h1>
+        <div className="flex justify-center items-center bg-[var(--color-bg-error-page)] error-message">
+          <h1 className="text-[var(--color-error)] text-2xl">{errorMsg}</h1>
         </div> 
         :
-        <div role="loading-spinner" className="flex justify-center items-center bg-gray-500 loading-spinner">
-          <div className="animate-spin rounded-full h-18 w-18 border-b-2 border-gray-900"></div>
+        <div role="loading-spinner" className="flex justify-center items-center bg-[var(--color-bg-error-page)] loading-spinner">
+          <div className="animate-spin rounded-full h-18 w-18 border-b-2 border-[var(--color-loading-spinner)]"></div>
         </div>)
       }
     </div>

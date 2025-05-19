@@ -48,25 +48,25 @@ export default function CustomNode({ nodeDatum }: { nodeDatum: NodeDatum }) {
     <g ref={ref} data-testid="custom-node" data-node-id={nodeDatum.id} data-node-hierarchy={nodeDatum.hierarchyLevel} cursor="move">
       <defs>
         <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="2" stdDeviation="3" floodColor="#000" floodOpacity="0.4" />
+          <feDropShadow dx="0" dy="2" stdDeviation="3" floodColor="var(--color-black)" floodOpacity="0.4" />
         </filter>
       </defs>
 
-      <rect width="210" height="90" x="-85" y="-35" rx="0" ry="0" stroke="#3B82F6" strokeWidth="2" fill="#1F2937" filter="url(#shadow)" />
+      <rect width="210" height="90" x="-85" y="-35" rx="0" ry="0" stroke="var(--color-node-stroke)" strokeWidth="2" fill="var(--color-bg-navbar)" filter="url(#shadow)" />
 
       <text
         fontSize="20" x="0" y="-8" textAnchor="middle" 
-        fill={ nodeDatum.hierarchyLevel === 1 ? "#F59E0B" : nodeDatum.hierarchyLevel === 2 ? "#10B981" : "#60A5FA" }
+        fill={ nodeDatum.hierarchyLevel === 1 ? "var(--color-node-text-ceo)" : nodeDatum.hierarchyLevel === 2 ? "var(--color-node-text-manager)" : "var(--color-input-border)" }
         fontWeight="bold"
       >
         {nodeDatum.name}
       </text>
 
-      <text fill="#D1D5DB" fontSize="12" x="5" y="20" textAnchor="middle" fontStyle="italic">
+      <text fill="var(--color-node-designation)" fontSize="12" x="5" y="20" textAnchor="middle" fontStyle="italic">
         {nodeDatum.designation}
       </text>
 
-      <text fill="#9CA3AF" fontSize="11" x="0" y="40" textAnchor="middle">
+      <text fill="var(--color-emp-text)" fontSize="11" x="0" y="40" textAnchor="middle">
         Emp ID: {nodeDatum.id}
       </text>
     </g>

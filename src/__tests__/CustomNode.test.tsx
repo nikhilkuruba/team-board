@@ -59,12 +59,12 @@ describe("CustomNode", () => {
     render(<svg><CustomNode nodeDatum={mockNode} /></svg>);
     const text = screen.getByText("Charlie");
 
-    expect(text).toHaveAttribute("fill", "#60A5FA")
+    expect(text).toHaveAttribute("fill", "var(--color-input-border)")
   });
   
   it("applies yellow color when hierarchyLevel is 1", () => {
     const yellowNode = { ...mockNode, hierarchyLevel: 1 };
     render(<svg><CustomNode nodeDatum={yellowNode} /></svg>);
-    expect(screen.getByText("Charlie")).toHaveAttribute("fill", "#F59E0B");
+    expect(screen.getByText("Charlie")).toHaveAttribute("fill", "var(--color-node-text-ceo)");
   })
 });

@@ -20,26 +20,48 @@ A React + TypeScript project that displays a hierarchical organizational chart o
 
 ## Getting Started
 
-### 1. Clone the repo
+### Clone the repo
 
 ```bash
 git clone https://github.com/nikhilkuruba/team-board.git
 cd team-board
 ```
 
-### 2. Install Dependencies
+### Install Dependencies
 
 ```bash
 npm install
 ```
 
-### 3. Start development server
+### Start development server
 
 ```bash
 npm run dev
 ```
 The app should be live at:
 http://localhost:5173
+
+### Run Unit Tests with [Vitest](https://vitest.dev/)
+
+```bash
+npm run test
+```
+
+### Run Unit Tests under watch
+```bash
+npx vitest --watch
+```
+
+### Type-Check, Compile and Minify for Production
+
+```bash
+npm run build
+```
+
+### Locally preview the production build
+```bash
+npm run preview
+```
 
 ### Usage
 
